@@ -6,7 +6,7 @@ import (
 	cli "gopkg.in/urfave/cli.v1"
 )
 
-const usage = "Manage apiaryo"
+const usage = "Manage apiary"
 
 func commands() []cli.Command {
 	return []cli.Command{
