@@ -17,15 +17,15 @@ func commands() []cli.Command {
 			Action:  nil,
 		},
 		{
-			Name:    "publish",
-			Aliases: []string{"p"},
-			Usage:   "Publish API",
-			Action:  nil,
-		},
-		{
 			Name:    "list",
 			Aliases: []string{"l"},
 			Usage:   "List APIs.",
+			Action:  nil,
+		},
+		{
+			Name:    "publish",
+			Aliases: []string{"p"},
+			Usage:   "Publish API",
 			Action:  nil,
 		},
 	}
