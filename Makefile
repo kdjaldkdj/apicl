@@ -7,6 +7,10 @@ GIT_HASH_FLAG=-X main.GitHash=$(GIT_HASH)
 GIT_TAG_FLAG=-X main.GitTag=$(GIT_TAG)
 
 
+all: test mac
+
+test:
+	cd apiary && go test || exit 1
 
 linux: cmd/apicl/main.go
 	GOOS=linux GOARCH=amd64 go build -ldflags "$(GIT_HASH_FLAG) $(GIT_TAG_FLAG)" -o $(BUILD_DIR)/$@/$(NAME) $^
@@ -17,5 +21,5 @@ mac: cmd/apicl/main.go
 clean: 
 	@rm -rf _build
 
-.PHONY: linux mac
+.PHONY: linux mac test
 

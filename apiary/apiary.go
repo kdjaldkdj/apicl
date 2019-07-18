@@ -6,11 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"strconv"
-	"text/tabwriter"
 	"time"
-
-	"gopkg.in/urfave/cli.v1"
 )
 
 const (
@@ -37,6 +33,11 @@ type ResponseList struct {
 	APIisPersonal       bool   `json:"apiIsPersonal"`
 }
 
+// Response holds the final answer
+type Response struct {
+	APIS []ResponseList
+}
+
 // NewClient returns a new client.
 func NewClient() *Client {
 	c := &Client{
@@ -49,19 +50,15 @@ func NewClient() *Client {
 }
 
 // List gets a list of APIs for the current user.
-func (c *Client) List(l *cli.Context) error {
+//func (c *Client) List(l *cli.Context) error {
+func (c *Client) List() (*Response, error) {
 
-	// Response holds the final answer
-	type Response struct {
-		APIS []ResponseList
-	}
-
-	r := Response{}
+	r := new(Response)
 	apiaryKey := os.Getenv("APIARY_API_KEY")
 
 	uri, err := url.Parse(c.BaseURL)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	h := http.Header{}
@@ -75,28 +72,13 @@ func (c *Client) List(l *cli.Context) error {
 
 	resp, err := c.http.Do(req)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	err = json.NewDecoder(resp.Body).Decode(&r)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	w := tabwriter.NewWriter(os.Stdout, 14, 7, 0, ' ', 0)
-	header := "APINAME\tDOCS\tSUBDOMAIN\tPRIVATE\tPUBLIC\tTEAM\tPERSONAL"
-	fmt.Fprintf(w, "%s\n", header)
-	for _, api := range r.APIS {
-		fmt.Fprintf(w, "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
-			api.APIName,
-			api.APIDocumentationURL,
-			api.APISubdomain,
-			strconv.FormatBool(api.APIisPrivate),
-			strconv.FormatBool(api.APIisPublic),
-			strconv.FormatBool(api.APIisTeam),
-			strconv.FormatBool(api.APIisPersonal),
-		)
-	}
-	w.Flush()
-	return nil
+	return r, nil
 }
