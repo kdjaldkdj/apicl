@@ -34,7 +34,7 @@ func TestList(t *testing.T) {
 	client.BaseURL = server.URL
 	os.Setenv("APIARY_API_KEY", "mockinapikey")
 
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/me/apis", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, listResponse)
 	})
 	apis, err := client.List()

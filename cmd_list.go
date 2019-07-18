@@ -6,11 +6,8 @@ import (
 	"strconv"
 	"text/tabwriter"
 
-	"github.com/nephyer/apicl/apiary"
 	"gopkg.in/urfave/cli.v1"
 )
-
-var c = apiary.NewClient()
 
 func list(l *cli.Context) error {
 	r, err := c.List()
