@@ -124,3 +124,50 @@ func (c *Client) Fetch(name string) (*FetchResponse, error) {
 
 	return r, nil
 }
+
+// PublishResponse holds info about an API published.
+type PublishResponse struct {
+}
+
+// Publish updates an existing API.
+func (c *Client) Publish(name, filename string) (*PublishResponse, error) {
+
+	r := new(PublishResponse)
+	apiaryKey := os.Getenv("APIARY_API_KEY")
+
+	uri, err := url.Parse(c.BaseURL + "/blueprint/publish/" + name)
+	if err != nil {
+		return nil, err
+	}
+
+	h := http.Header{}
+	h.Set("Content-Type", "application/json; charset=utf-8")
+	h.Set("Authentication", fmt.Sprintf("Token %s", apiaryKey))
+
+	data, err := os.Open(filename)
+	if err != nil {
+		return nil, err
+	}
+	defer data.Close()
+
+	fmt.Println(uri.String())
+	req, err := http.NewRequest(http.MethodPost, uri.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header = h
+
+	resp, err := c.http.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println(resp)
+	// err = json.NewDecoder(resp.Body).Decode(&r)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return nil, err
+	// }
+
+	return r, nil
+}

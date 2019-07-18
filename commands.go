@@ -29,7 +29,11 @@ func Commands() []cli.Command {
 			Name:    "publish",
 			Aliases: []string{"p"},
 			Usage:   "Publish API",
-			Action:  nil,
+			Action:  publish,
+			Flags: []cli.Flag{
+				cli.StringFlag{Name: "api-name, a"},
+				cli.StringFlag{Name: "filename, f"},
+			},
 		},
 	}
 }
