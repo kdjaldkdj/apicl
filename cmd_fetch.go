@@ -7,10 +7,21 @@ import (
 	"gopkg.in/urfave/cli.v1"
 )
 
+var fetchUsage = `
+NAME:
+   apicl fetch - Fetch API information
+
+USAGE:
+   apicl fetch [command options] [arguments...]
+
+OPTIONS:
+   --api-name value, -a value 
+`
+
 func fetch(l *cli.Context) error {
 	apiName := l.String("api-name")
 	if apiName == "" {
-		fmt.Println("--api-name must be provided. Please use --help")
+		fmt.Printf("%s", fetchUsage)
 		os.Exit(1)
 	}
 	r, err := c.Fetch(apiName)
