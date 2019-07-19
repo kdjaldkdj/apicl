@@ -2,8 +2,7 @@
 
 `apicl` is a CLI tool that helps you to list, fetch and update APIS for APIARY.
 
-[![Build Status](https://travis-ci.org/nephyer/apicl.svg?branch=master)](https://travis-ci.org/nephyer/apicl)
-
+[![Build Status](https://travis-ci.org/kdjaldkdj/apicl.svg?branch=master)](https://travis-ci.org/kdjaldkdj/apicl)
 ## Description
 
 With `apicl` you can manage Apiary.o
