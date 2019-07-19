@@ -13,8 +13,9 @@ You can use Go 1.1X as requirement due to Go Modules. In order to  build this  y
 
 *Debian/Ubuntu*
 ```bash
-$ sudo apt install  build-essential git make
-```
+$ sudo apt update
+$ sudo apt install  build-essential git make -y
+``
 
 Now check out the git repository: 
 
