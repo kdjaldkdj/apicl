@@ -12,7 +12,10 @@ const usage = "Manage apiary"
 
 var version = "0.1.0"
 
+// GitHash contains the hash of the buid.
 var GitHash string
+
+// GitTag contains the tag of build if defined.
 var GitTag string
 
 func main() {
