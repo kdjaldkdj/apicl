@@ -6,8 +6,16 @@ GIT_HASH=$(shell git rev-parse --short HEAD)
 GIT_HASH_FLAG=-X main.GitHash=$(GIT_HASH)
 GIT_TAG_FLAG=-X main.GitTag=$(GIT_TAG)
 
+OS:=
 
-all: test mac
+ifeq ($(shell  uname -s), Darwin)
+	OS += mac
+else
+	OS += linux
+endif
+
+
+all: test $(OS)
 
 test:
 	cd apiary && go test || exit 1

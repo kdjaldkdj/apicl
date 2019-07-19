@@ -6,7 +6,31 @@
 
 ## Description
 
-With `apicl` you can manage Apiary.
+With `apicl` you can manage Apiary.o
+
+## Installation
+
+You can use Go 1.1X as requirement due to Go Modules. In order to  build this  you will ned:
+
+*Debian/Ubuntu*
+```bash
+$ sudo apt install  build-essential git make
+```
+
+Now check out the git repository: 
+
+```
+$ git clone  https://github.com/kdjaldkdj/apicl/
+$ cd apicl && make
+```
+
+After the tool is buil, you will need to export you APIARY_API_KEY, otherwise the application
+will  not start.
+
+```
+_build/linux/apicl 
+Please, configure your APIARY_API_KEY before using this tool.
+```
 
 ## Usage
 
@@ -29,6 +53,38 @@ GLOBAL OPTIONS:
    --help, -h     show help
    --version, -v  print the version
 ```
+
+Currrent implementation supports 
+ * list
+ * fetch
+
+## Fetch 
+
+An example fetching a given API. You must use the subdomain name as name.
+
+```
+_build/linux/apicl  fetch  --api-name sre3
+```
+
+## TODO
+
+Curent implemntation for publishing gets a 400 error, but designed usage would be like this.
+
+```
+USAGE:
+   apicl publish [command options] [arguments...]
+
+OPTIONS:
+   --api-name value, -a value  
+   --filename value, -f value
+```
+Example
+
+`$ apicl publish --api-name publishapi2 --filename publishapi2`
+
+Filename holds your API Blueprint to update.
+
+
 
 ## License
 
